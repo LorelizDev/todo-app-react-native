@@ -36,7 +36,14 @@ export const taskController = {
         return;
       }
       await TaskModel.update({ title, completed }, { where: { id } });
-      res.status(200).json({ message: '✅ Task updated successfully' });
+      res.status(200).json({
+        message: '✅ Task updated successfully',
+        task: {
+          id,
+          title,
+          completed,
+        },
+      });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: '❌ Failed to update task' });
